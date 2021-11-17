@@ -297,6 +297,13 @@ bool Pathfind::A_Start_OpenSet(const char* filePath, const char* savePath, Heuri
 		grid.push_back(yGrid);
 	}
 
+	// calculate h cost of ever node
+	for (auto x : grid) {
+		for (auto y : x) {
+			y->SetHCost(end, heuristic);
+		}
+	}
+
 	// ----- INIT START NODE -----
 	start->SetGCost(0);
 	start->SetHCost(end, heuristic);

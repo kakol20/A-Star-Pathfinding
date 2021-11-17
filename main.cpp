@@ -8,8 +8,17 @@
 
 int main() {
 	// open image
-	Image path("images/obstacles.png");
-	String savePath = "images/obstacles_solve_manhattan.png";
+	String fileName = "obstacles";
+	String pathLoc = "images/";
+	pathLoc = pathLoc + fileName;
+
+	//String savePath = "images/obstacles_solve_manhattan.png";
+	String savePath = "images/";
+	savePath = pathLoc + "_solve_manhattan.png";
+
+	pathLoc += ".png";
+
+	Image path(pathLoc.GetChar());
 
 	Heuristic heuristic = Heuristic::MANHATTAN;
 	bool allowDiagonal = true;
@@ -211,6 +220,7 @@ int main() {
 
 		pathNode = pathNode->GetParent();
 	}
+	pathArray.push_back(start);
 
 	for (int i = 0; i < (int)pathArray.size(); i++) {
 		int x = pathArray[i]->GetX();

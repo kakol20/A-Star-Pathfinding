@@ -105,7 +105,7 @@ int main() {
 		// down
 		if (down) {
 			neighbours.push_back(grid[x][y + 1]);
-			downObstacle = grid[x][y - 1]->GetObstacle();
+			downObstacle = grid[x][y + 1]->GetObstacle();
 		}
 		// left {
 		if (left) {
@@ -122,26 +122,30 @@ int main() {
 			// right hand side
 			if (right) {
 				if (up) { // top
-					/*if (allowCross || (!upObstacle && !rightObstacle)) {
+					if (allowCross || (!upObstacle && !rightObstacle)) {
 						neighbours.push_back(grid[x + 1][y - 1]);
-					}*/
-
-					neighbours.push_back(grid[x + 1][y - 1]);
+					}
 				}
 
 				if (down) { // bottom
-					neighbours.push_back(grid[x + 1][y + 1]);
+					if (allowCross || (!downObstacle && !rightObstacle)) {
+						neighbours.push_back(grid[x + 1][y + 1]);
+					}
 				}
 			}
 
 			// left hand side
 			if (left) {
 				if (up) { // top
-					neighbours.push_back(grid[x - 1][y - 1]);
+					if (allowCross || (!upObstacle && !leftObstacle)) {
+						neighbours.push_back(grid[x - 1][y - 1]);
+					}
 				}
 
 				if (down) { // bottom
-					neighbours.push_back(grid[x - 1][y + 1]);
+					if (allowCross || (!downObstacle && !leftObstacle)) {
+						neighbours.push_back(grid[x - 1][y + 1]);
+					}
 				}
 			}
 		}
@@ -175,8 +179,31 @@ int main() {
 			}
 		}
 	}
+
+	// draw open set
+	if (!openSet.empty()) {
+		for (size_t i = 0; i < openSet.size(); i++) {
+			int x = openSet[i]->GetX();
+			int y = openSet[i]->GetY();
+			int index = path.GetIndex(x, y);
+
+			path.SetData(index + 0, (uint8_t)127);
+			path.SetData(index + 1, (uint8_t)255);
+			path.SetData(index + 2, (uint8_t)127);
+		}
+	}
+
+	for (size_t i = 0; i < closedSet.size(); i++) {
+		int x = closedSet[i]->GetX();
+		int y = closedSet[i]->GetY();
+		int index = path.GetIndex(x, y);
+
+		path.SetData(index + 0, (uint8_t)230);
+		path.SetData(index + 1, (uint8_t)255);
+		path.SetData(index + 2, (uint8_t)230);
+	}
 	
-	// get path
+	// get path and draw
 	Node* pathNode = end;
 	std::vector<Node*> pathArray;
 	while (pathNode != start) {

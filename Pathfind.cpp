@@ -90,7 +90,7 @@ void Pathfind::A_Star(const char* pathLoc, const char* savePath, Heuristic heuri
 		int y = current->GetY();
 
 		bool up = y != 0, down = y < height - 1, left = x != 0, right = x < width - 1;
-		bool upObstacle = true, downObstacle = true, leftObstacle = true, rightObstacle = true;
+		bool upObstacle = false, downObstacle = false, leftObstacle = false, rightObstacle = false;
 
 		// up
 		if (up) {
@@ -117,13 +117,13 @@ void Pathfind::A_Star(const char* pathLoc, const char* savePath, Heuristic heuri
 			// right hand side
 			if (right) {
 				if (up) { // top
-					if (allowCross || (!upObstacle && !rightObstacle)) {
+					if (allowCross || !(upObstacle && rightObstacle)) {
 						neighbours.push_back(grid[x + 1][y - 1]);
 					}
 				}
 
 				if (down) { // bottom
-					if (allowCross || (!downObstacle && !rightObstacle)) {
+					if (allowCross || !(downObstacle && rightObstacle)) {
 						neighbours.push_back(grid[x + 1][y + 1]);
 					}
 				}
@@ -132,13 +132,13 @@ void Pathfind::A_Star(const char* pathLoc, const char* savePath, Heuristic heuri
 			// left hand side
 			if (left) {
 				if (up) { // top
-					if (allowCross || (!upObstacle && !leftObstacle)) {
+					if (allowCross || !(upObstacle && leftObstacle)) {
 						neighbours.push_back(grid[x - 1][y - 1]);
 					}
 				}
 
 				if (down) { // bottom
-					if (allowCross || (!downObstacle && !leftObstacle)) {
+					if (allowCross || !(downObstacle && leftObstacle)) {
 						neighbours.push_back(grid[x - 1][y + 1]);
 					}
 				}

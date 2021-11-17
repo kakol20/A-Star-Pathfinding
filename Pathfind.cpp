@@ -156,19 +156,15 @@ void Pathfind::A_Star(const char* pathLoc, const char* savePath, Heuristic heuri
 
 					float tempG = (float)current->GetGCost() + Node::Distance(current, neighbours[i], heuristic);
 
-					if (inOpenSet) {
-						if (tempG < neighbours[i]->GetGCost()) {
-							neighbours[i]->SetGCost(tempG);
-							neighbours[i]->SetParent(current);
-							neighbours[i]->SetFCost();
-						}
-					}
-					else {
+					if (tempG < neighbours[i]->GetGCost() || !inOpenSet) {
 						neighbours[i]->SetGCost(tempG);
-						neighbours[i]->SetParent(current);
 						neighbours[i]->SetFCost();
 
-						openSet.push_back(neighbours[i]);
+						neighbours[i]->SetParent(current);
+
+						if (!inOpenSet) {
+							openSet.push_back(neighbours[i]);
+						}
 					}
 				}
 			}

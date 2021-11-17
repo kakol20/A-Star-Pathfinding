@@ -9,17 +9,23 @@
 
 int main() {
 	// open image
-	String fileName = "obstacles";
-	String pathLoc = "images/";
-	pathLoc = pathLoc + fileName;
+	std::vector<String> files;
 
-	//String savePath = "images/obstacles_solve_manhattan.png";
-	String savePath = "images/";
-	savePath = pathLoc + "_solve_manhattan.png";
+	files.push_back("blank");
+	files.push_back("simple");
+	files.push_back("obstacles");
+	files.push_back("maze");
 
-	pathLoc += ".png";
+	for (auto it = files.begin(); it != files.end(); it++) {
+		String pathLoc = "images/";
+		String savePath = "images/";
 
-	Pathfind::A_Star(pathLoc.GetChar(), savePath.GetChar(), Heuristic::MANHATTAN, true, false);
+		pathLoc = pathLoc + *it;
+		savePath = pathLoc + "_solve_euclidean.png";
+		pathLoc = pathLoc + ".png";
+
+		Pathfind::A_Star(pathLoc.GetChar(), savePath.GetChar(), Heuristic::EUCLIDEAN, true, false);
+	}
 
 	system("pause");
 

@@ -197,9 +197,9 @@ void Pathfind::A_Star_ClosedSet(const char * filePath, const char* savePath, Heu
 		int y = closedSet[i]->GetY();
 		int index = path.GetIndex(x, y);
 
-		path.SetData(index + 0, (uint8_t)230);
+		path.SetData(index + 0, (uint8_t)191);
 		path.SetData(index + 1, (uint8_t)255);
-		path.SetData(index + 2, (uint8_t)230);
+		path.SetData(index + 2, (uint8_t)191);
 	}
 
 	// get path and draw

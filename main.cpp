@@ -21,11 +21,11 @@ int main() {
 		String savePath = "images/";
 
 		pathLoc = pathLoc + *it;
-		savePath = pathLoc + "_solve_euclidean_noDiagonal.png";
+		savePath = pathLoc + "_solve_withClosedSet_noDiagonal.png";
 		pathLoc = pathLoc + ".png";
 
-		//Pathfind::A_Star_ClosedSet(pathLoc.GetChar(), savePath.GetChar(), Heuristic::EUCLIDEAN, true, false);
-		Pathfind::A_Start_OpenSet(pathLoc.GetChar(), savePath.GetChar(), Heuristic::EUCLIDEAN, false, false);
+		Pathfind::A_Star_ClosedSet(pathLoc.GetChar(), savePath.GetChar(), Heuristic::EUCLIDEAN, false, false);
+		//Pathfind::A_Start_OpenSet(pathLoc.GetChar(), savePath.GetChar(), Heuristic::EUCLIDEAN, true, false);
 	}
 
 	system("pause");

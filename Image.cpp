@@ -27,7 +27,7 @@ Image::Image(int w, int h, int channels)
 	m_data = new uint8_t[m_size];
 	m_dataF = new float[m_size];
 
-	for (int i = 0; i < m_size; i++)
+	for (int i = 0; i < (int)m_size; i++)
 	{
 		m_data[i] = 0;
 
@@ -84,7 +84,7 @@ bool Image::Read(const char* fileName)
 
 	m_dataF = new float[m_size];
 
-	for (int i = 0; i < m_size; i++)
+	for (int i = 0; i < (int)m_size; i++)
 	{
 		m_dataF[i] = (float)m_data[i];
 	}
@@ -103,7 +103,7 @@ bool Image::Write(const char* fileName)
 	ImageType type = GetFileType(fileName);
 	int success = 0;
 
-	for (int i = 0; i < m_size; i++)
+	for (int i = 0; i < (int)m_size; i++)
 	{
 		m_dataF[i] = m_dataF[i] > 255.0f ? 255.0f : m_dataF[i];
 		m_dataF[i] = m_dataF[i] < 0.0f ? 0.0f : m_dataF[i];

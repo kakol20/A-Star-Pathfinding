@@ -35,7 +35,6 @@ public:
 
 	uint8_t GetData(int index);
 	void SetData(int index, uint8_t data);
-	void SetDataF(int index, float data);
 
 	float GetDataF(int index);
 	void SetData(int index, float data);

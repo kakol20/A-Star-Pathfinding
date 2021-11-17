@@ -168,14 +168,6 @@ void Image::SetData(int index, uint8_t data)
 	m_dataF[index] = (float)data;
 }
 
-void Image::SetDataF(int index, float data)
-{
-	m_dataF[index] = data > 255.0f ? 255.0f : data;
-	m_dataF[index] = m_dataF[index] < 0.0f ? 0.0f : m_dataF[index];
-
-	m_data[index] = (uint8_t)round(m_dataF[index]);
-}
-
 float Image::GetDataF(int index)
 {
 	return m_dataF[index];

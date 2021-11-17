@@ -24,7 +24,8 @@ int main() {
 		savePath = pathLoc + "_solve_euclidean.png";
 		pathLoc = pathLoc + ".png";
 
-		Pathfind::A_Star(pathLoc.GetChar(), savePath.GetChar(), Heuristic::EUCLIDEAN, true, false);
+		//Pathfind::A_Star_ClosedSet(pathLoc.GetChar(), savePath.GetChar(), Heuristic::EUCLIDEAN, true, false);
+		Pathfind::A_Start_OpenSet(pathLoc.GetChar(), savePath.GetChar(), Heuristic::EUCLIDEAN, true, false);
 	}
 
 	system("pause");

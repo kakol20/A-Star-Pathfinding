@@ -399,19 +399,6 @@ bool Pathfind::A_Start_OpenSet(const char* filePath, const char* savePath, Heuri
 	// ----- SAVE RESULT AS PNG IMAGE -----
 
 	if (foundRoute) {
-		// draw open set
-		if (!openSet.empty()) {
-			for (size_t i = 0; i < openSet.size(); i++) {
-				int x = openSet[i]->GetX();
-				int y = openSet[i]->GetY();
-				int index = gridImg.GetIndex(x, y);
-
-				gridImg.SetData(index + 0, (uint8_t)127);
-				gridImg.SetData(index + 1, (uint8_t)255);
-				gridImg.SetData(index + 2, (uint8_t)127);
-			}
-		}
-
 		// draw path
 		Node* pathNode = end;
 		std::vector<Node*> pathArray;

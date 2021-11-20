@@ -2,6 +2,7 @@
 
 #include <stdlib.h>
 #include <math.h>
+#include <algorithm>
 
 Node::Node() {
 	m_fCost = 0;
@@ -65,18 +66,7 @@ void Node::SetGCost(const float gCost) {
 /// </summary>
 /// <param name="end"></param>
 void Node::SetHCost(const Node* end, Heuristic heuristic) {
-	float x = (float)abs(end->m_x - m_x);
-	float y = (float)abs(end->m_y - m_y);
-
-	switch (heuristic) {
-	case Heuristic::MANHATTAN:
-		m_hCost = x + y;
-		break;
-
-	case Heuristic::EUCLIDEAN:
-		m_hCost = sqrtf((x * x) + (y * y));
-		break;
-	}
+	m_hCost = Node::Distance(this, end, heuristic);
 }
 
 float Node::GetFCost() {
@@ -115,12 +105,15 @@ float Node::Distance(const Node* start, const Node* end, Heuristic heuristic) {
 	float x = (float)abs(end->m_x - start->m_x);
 	float y = (float)abs(end->m_y - start->m_y);
 
+	float mx = std::max(x, y);
+	float mn = std::min(x, y);
+
 	switch (heuristic) {
 	case Heuristic::MANHATTAN:
 		return x + y;
 
 	case Heuristic::EUCLIDEAN:
-		return sqrtf((x * x) + (y * y));
+		return (1.4f * mn) + 1.0f * (mx - mn);
 	}
 	return 0.0f;
 }

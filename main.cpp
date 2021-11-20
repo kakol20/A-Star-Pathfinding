@@ -25,7 +25,7 @@ int main() {
 		pathLoc = pathLoc + *it;
 		savePathEuclidean = savePathEuclidean + *it;
 		savePathManhattan = savePathManhattan + *it;
-		d
+		
 		savePathManhattan = savePathManhattan + "_solve_manhattan.png";
 		savePathEuclidean = savePathEuclidean + "_solve_euclidean.png";
 		pathLoc = pathLoc + ".png";

@@ -30,8 +30,8 @@ int main() {
 		savePathEuclidean = savePathEuclidean + "_solve_euclidean.png";
 		pathLoc = pathLoc + ".png";
 
-		Pathfind::A_Star_ClosedSet(pathLoc.GetChar(), savePathManhattan.GetChar(), Heuristic::MANHATTAN, true, false);
-		Pathfind::A_Star_ClosedSet(pathLoc.GetChar(), savePathEuclidean.GetChar(), Heuristic::EUCLIDEAN, true, false);
+		Pathfind::AStar(pathLoc.GetChar(), savePathManhattan.GetChar(), Heuristic::MANHATTAN, true, false);
+		Pathfind::AStar(pathLoc.GetChar(), savePathEuclidean.GetChar(), Heuristic::EUCLIDEAN, true, false);
 
 		std::cout << "\n----------\n";
 		//Pathfind::A_Start_OpenSet(pathLoc.GetChar(), savePath.GetChar(), Heuristic::EUCLIDEAN, true, false);

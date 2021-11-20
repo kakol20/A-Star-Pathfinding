@@ -16,7 +16,7 @@ Pathfind::Pathfind() {
 /// <param name="heuristic"></param>
 /// <param name="allowDiagonal"></param>
 /// <param name="allowCross"></param>
-void Pathfind::A_Star_ClosedSet(const char * filePath, const char* savePath, Heuristic heuristic, bool allowDiagonal, bool allowCross) {
+void Pathfind::AStar(const char * filePath, const char* savePath, Heuristic heuristic, bool allowDiagonal, bool allowCross) {
 	std::cout << '\n';
 
 	Image path(filePath);

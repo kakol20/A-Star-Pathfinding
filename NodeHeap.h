@@ -1,5 +1,4 @@
-#ifndef NODEHEAP_H
-#define NODEHEAP_H
+#pragma once
 
 #include <algorithm>
 #include <vector>
@@ -34,5 +33,3 @@ private:
 
 	std::vector<Node*> m_heap;
 };
-
-#endif // !NODEHEAP_H

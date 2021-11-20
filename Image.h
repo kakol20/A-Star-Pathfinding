@@ -1,5 +1,4 @@
-#ifndef IMAGE_H
-#define IMAGE_H
+#pragma once
 
 #include <cstdint>
 #include <cstdio>
@@ -53,5 +52,3 @@ private:
 
 	ImageType GetFileType(const char* fileName);
 };
-
-#endif // !IMAGE_H

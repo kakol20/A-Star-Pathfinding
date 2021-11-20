@@ -1,5 +1,6 @@
 #include "Pathfind.h"
 #include "NodeHeap.h"
+#include "Weights.h"
 
 #include <vector>
 #include <stdlib.h>
@@ -161,7 +162,7 @@ void Pathfind::AStar(const char * filePath, const char* savePath, Heuristic heur
 				if (!inClosedSet) {
 					bool inOpenSet = openSet->Contains(neighbours[i]);
 
-					float tempG = (float)current->GetGCost() + Node::Distance(current, neighbours[i], heuristic);
+					float tempG = (float)current->GetGCost() + Node::Distance(current, neighbours[i], heuristic) + Weights::StraightTowards(current, neighbours[i], end);
 
 					if (tempG < neighbours[i]->GetGCost() || !inOpenSet) {
 						neighbours[i]->SetGCost(tempG);

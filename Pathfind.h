@@ -1,5 +1,4 @@
-#ifndef PATHFIND_H
-#define PATHFIND_H
+#pragma once
 #include "Node.h"
 #include "Image.h"
 
@@ -11,5 +10,3 @@ public:
 
 	~Pathfind();
 };
-
-#endif // !PATHFIND_H

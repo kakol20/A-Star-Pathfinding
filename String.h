@@ -1,5 +1,4 @@
-#ifndef STRING_H
-#define STRING_H
+#pragma once
 
 #include <iostream>
 
@@ -52,5 +51,3 @@ private:
 
 std::ostream& operator<<(std::ostream& os, const String& string);
 std::istream& operator>>(std::istream& is, String& string);
-
-#endif // !STRING_H

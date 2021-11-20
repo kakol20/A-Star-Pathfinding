@@ -18,7 +18,11 @@ void NodeHeap::Push(Node* item) {
 /// </summary>
 void NodeHeap::Pop() {
 	if (m_heap.size() > 1) {
-		std::iter_swap(m_heap.begin(), m_heap.end() - 1);
+		Node* temp = m_heap[m_heap.size() - 1];
+
+		m_heap[m_heap.size() - 1] = m_heap[0];
+		m_heap[0] = temp;
+		//std::iter_swap(m_heap.begin(), m_heap.end() - 1);
 	}
 
 	m_heap.pop_back();
@@ -83,7 +87,10 @@ void NodeHeap::SortDown() {
 			}
 
 			if (m_heap[parent]->GetFCost() > m_heap[swapIndex]->GetFCost()) {
-				std::iter_swap(m_heap.begin() + parent, m_heap.begin() + swapIndex);
+				Node* temp = m_heap[swapIndex];
+
+				m_heap[swapIndex] = m_heap[parent];
+				m_heap[parent] = temp;
 			}
 
 			parent = swapIndex;
@@ -104,7 +111,10 @@ void NodeHeap::SortUp() {
 		int parent = (child - 1) / 2;
 
 		if (m_heap[parent]->GetFCost() > m_heap[child]->GetFCost()) {
-			std::iter_swap(m_heap.begin() + parent, m_heap.begin() + child);
+			Node* temp = m_heap[child];
+
+			m_heap[child] = m_heap[parent];
+			m_heap[parent] = temp;
 		}
 		else {
 			break;

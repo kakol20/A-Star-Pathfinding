@@ -108,7 +108,7 @@ float Node::Distance(const Node* start, const Node* end, Heuristic heuristic) {
 	float mx = std::max(x, y);
 	float mn = std::min(x, y);
 
-	float sqrt2 = 1.41f;
+	float sqrt2 = 1.41421356237f;
 
 	float F = sqrt2 - 1.0f;
 

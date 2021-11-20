@@ -6,3 +6,5 @@ Blue pixel is the end
 
 ## To Do
 - [ ] F Cost Weighting using Dot Product
+- - [ ] Prioritize not turning
+- - [ ] Prioritize turning towards end

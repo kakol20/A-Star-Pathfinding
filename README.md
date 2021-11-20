@@ -5,6 +5,7 @@ Red pixel is the start
 Blue pixel is the end
 
 ## To Do
-- [ ] F Cost Weighting using Dot Product
+- [ ] G Cost Weighting using Dot Product
 - - [ ] Prioritize not turning
 - - [ ] Prioritize turning towards end
+- [ ] Use priority_queue to store open set

@@ -1,4 +1,5 @@
 #include "Pathfind.h"
+#include "NodeHeap.h"
 
 #include <vector>
 #include <stdlib.h>
@@ -59,8 +60,12 @@ void Pathfind::A_Star_ClosedSet(const char * filePath, const char* savePath, Heu
 		grid.push_back(yGrid);
 	}
 
-	std::vector<Node*> openSet;
+	//std::vector<Node*> openSet;
 	std::vector<Node*> closedSet;
+
+	NodeHeap* openSet = new NodeHeap();
+
+	//std::priority_queue<Node*, std::vector<Node*>, decltype(&Node::Ascending)> openSet(Node::Ascending);
 
 	// set h cost of every node
 	for (int x = 0; x < width; x++) {
@@ -72,23 +77,16 @@ void Pathfind::A_Star_ClosedSet(const char * filePath, const char* savePath, Heu
 	start->SetGCost(0);
 	start->SetFCost();
 
-	//int maxFCost = abs(end->GetX() - start->GetX()) + abs(end->GetY() - start->GetY());
-
-	openSet.push_back(start);
+	openSet->Push(start);
 
 	Node* current = nullptr;
-	while (!openSet.empty()) {
-		// set current node from open set with lowest f cost
-		int index = 0;
-		for (int i = 0; i < (int)openSet.size(); i++) {
-			if (openSet[i]->GetFCost() < openSet[index]->GetFCost()) index = i;
-		}
-		current = openSet[index];
-		if (current == end) {
-			break;
-		}
+	while (!openSet->Empty()) {
+		current = openSet->Top();
+		
+		if (current == end) break;
 
-		openSet.erase(openSet.begin() + index);
+		openSet->Pop();
+
 		closedSet.push_back(current);
 
 		// find neighbours
@@ -160,7 +158,7 @@ void Pathfind::A_Star_ClosedSet(const char * filePath, const char* savePath, Heu
 				bool inClosedSet = std::find(closedSet.begin(), closedSet.end(), neighbours[i]) != closedSet.end();
 
 				if (!inClosedSet) {
-					bool inOpenSet = std::find(openSet.begin(), openSet.end(), neighbours[i]) != openSet.end();
+					bool inOpenSet = openSet->Contains(neighbours[i]);
 
 					float tempG = (float)current->GetGCost() + Node::Distance(current, neighbours[i], heuristic);
 
@@ -171,7 +169,7 @@ void Pathfind::A_Star_ClosedSet(const char * filePath, const char* savePath, Heu
 						neighbours[i]->SetParent(current);
 
 						if (!inOpenSet) {
-							openSet.push_back(neighbours[i]);
+							openSet->Push(neighbours[i]);
 						}
 					}
 				}
@@ -180,10 +178,12 @@ void Pathfind::A_Star_ClosedSet(const char * filePath, const char* savePath, Heu
 	}
 
 	// draw open set
-	if (!openSet.empty()) {
-		for (size_t i = 0; i < openSet.size(); i++) {
-			int x = openSet[i]->GetX();
-			int y = openSet[i]->GetY();
+	if (!openSet->Empty()) {
+		for (size_t i = 0; i < openSet->Size(); i++) {
+			/*int x = openSet[i]->GetX();
+			int y = openSet[i]->GetY();*/
+			int x = openSet->GetIndex(i)->GetX();
+			int y = openSet->GetIndex(i)->GetY();
 			int index = path.GetIndex(x, y);
 
 			path.SetData(index + 0, (uint8_t)127);
@@ -192,6 +192,7 @@ void Pathfind::A_Star_ClosedSet(const char * filePath, const char* savePath, Heu
 		}
 	}
 
+	// draw closed set
 	for (size_t i = 0; i < closedSet.size(); i++) {
 		int x = closedSet[i]->GetX();
 		int y = closedSet[i]->GetY();
@@ -228,7 +229,10 @@ void Pathfind::A_Star_ClosedSet(const char * filePath, const char* savePath, Heu
 	path.Write(savePath);
 
 	// destroy pointers
-	openSet.clear();
+	openSet->Clear();
+	delete openSet;
+	openSet = nullptr;
+
 	closedSet.clear();
 	pathArray.clear();
 	for (int x = 0; x < width; x++) {

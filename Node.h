@@ -25,10 +25,12 @@ public:
 	void SetObstacle(const bool flag);
 	bool GetObstacle();
 
-	static float Distance(const Node* start, const Node* end, Heuristic heuristic);
-
 	void SetParent(Node* parent);
 	Node* GetParent();
+
+	bool operator>(const Node* other);
+
+	static float Distance(const Node* start, const Node* end, Heuristic heuristic);
 
 	~Node();
 

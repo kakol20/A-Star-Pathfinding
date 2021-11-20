@@ -8,4 +8,4 @@ Blue pixel is the end
 - [ ] G Cost Weighting using Dot Product
 - - [ ] Prioritize not turning
 - - [ ] Prioritize turning towards end
-- [ ] Use priority_queue to store open set
+- [X] Use heap to store open set ?

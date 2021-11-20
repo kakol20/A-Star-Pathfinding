@@ -99,6 +99,18 @@ bool Node::GetObstacle() {
 	return m_obstacle;
 }
 
+void Node::SetParent(Node* parent) {
+	m_parent = parent;
+}
+
+Node* Node::GetParent() {
+	return m_parent;
+}
+
+bool Node::operator>(const Node* other) {
+	return m_fCost > other->m_fCost;
+}
+
 float Node::Distance(const Node* start, const Node* end, Heuristic heuristic) {
 	float x = (float)abs(end->m_x - start->m_x);
 	float y = (float)abs(end->m_y - start->m_y);
@@ -111,14 +123,6 @@ float Node::Distance(const Node* start, const Node* end, Heuristic heuristic) {
 		return sqrtf((x * x) + (y * y));
 	}
 	return 0.0f;
-}
-
-void Node::SetParent(Node* parent) {
-	m_parent = parent;
-}
-
-Node* Node::GetParent() {
-	return m_parent;
 }
 
 Node::~Node() {

@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClInclude Include="Image.h" />
     <ClInclude Include="Node.h" />
+    <ClInclude Include="NodeHeap.h" />
     <ClInclude Include="Pathfind.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="stb_image_write.h" />
@@ -150,6 +151,7 @@
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Node.cpp" />
+    <ClCompile Include="NodeHeap.cpp" />
     <ClCompile Include="Pathfind.cpp" />
     <ClCompile Include="String.cpp" />
   </ItemGroup>

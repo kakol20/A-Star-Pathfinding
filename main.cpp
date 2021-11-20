@@ -12,6 +12,7 @@ int main() {
 	std::vector<String> files;
 
 	files.push_back("blank");
+	files.push_back("blank_10x10");
 	files.push_back("simple");
 	files.push_back("obstacles");
 	files.push_back("maze");
@@ -21,10 +22,10 @@ int main() {
 		String savePath = "images/";
 
 		pathLoc = pathLoc + *it;
-		savePath = pathLoc + "_solve_withClosedSet_noDiagonal.png";
+		savePath = pathLoc + "_solve.png";
 		pathLoc = pathLoc + ".png";
 
-		Pathfind::A_Star_ClosedSet(pathLoc.GetChar(), savePath.GetChar(), Heuristic::EUCLIDEAN, false, false);
+		Pathfind::A_Star_ClosedSet(pathLoc.GetChar(), savePath.GetChar(), Heuristic::EUCLIDEAN, true, false);
 		//Pathfind::A_Start_OpenSet(pathLoc.GetChar(), savePath.GetChar(), Heuristic::EUCLIDEAN, true, false);
 	}
 

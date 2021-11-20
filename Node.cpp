@@ -126,7 +126,7 @@ float Node::Distance(const Node* start, const Node* end, Heuristic heuristic) {
 		return F * mn + mx;
 		
 	case Heuristic::REALEUCLIDEAN:
-		return sqrt((x * x) + (y * y));
+		return sqrtf((x * x) + (y * y));
 	}
 	return 0.0f;
 }

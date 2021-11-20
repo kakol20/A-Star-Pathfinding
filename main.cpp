@@ -34,9 +34,9 @@ int main() {
 		pathLoc = pathLoc + ".png";
 
 		for (auto jt = heuristics.begin(); jt != heuristics.end(); jt++) {
-			String savePath = "images/heuristic/";
+			String savePath = "images/weights/";
 			savePath += *it;
-			savePath += "_solve_";
+			savePath += "_straightTowards_";
 
 			savePath += (*jt).second;
 			savePath += ".png";

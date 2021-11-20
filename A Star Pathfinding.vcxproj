@@ -146,6 +146,8 @@
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="stb_image_write.h" />
     <ClInclude Include="String.h" />
+    <ClInclude Include="Vector2D.h" />
+    <ClInclude Include="Weights.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Image.cpp" />
@@ -154,6 +156,8 @@
     <ClCompile Include="NodeHeap.cpp" />
     <ClCompile Include="Pathfind.cpp" />
     <ClCompile Include="String.cpp" />
+    <ClCompile Include="Vector2D.cpp" />
+    <ClCompile Include="Weights.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

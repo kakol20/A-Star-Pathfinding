@@ -206,9 +206,12 @@ void Pathfind::AStar(const char * filePath, const char* savePath, Heuristic heur
 
 	// get path and draw
 	Node* pathNode = end;
+	float length = 0;
 	std::vector<Node*> pathArray;
 	while (pathNode != start) {
 		pathArray.push_back(pathNode);
+
+		length += Node::Distance(pathNode, pathNode->GetParent(), Heuristic::EUCLIDEAN);
 
 		pathNode = pathNode->GetParent();
 	}
@@ -228,7 +231,7 @@ void Pathfind::AStar(const char * filePath, const char* savePath, Heuristic heur
 	}
 
 	path.Write(savePath);
-	std::cout << "Path Length: " << end->GetGCost() << '\n';
+	std::cout << "Path Length: " << length << '\n';
 
 	// destroy pointers
 	openSet->Clear();

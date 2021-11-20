@@ -7,5 +7,5 @@ Blue pixel is the end
 ## To Do
 - [ ] G Cost Weighting using Dot Product
 - - [ ] Prioritize not turning
-- - [ ] Prioritize turning towards end
+- - [X] Prioritize turning towards end
 - [X] Use heap to store open set ?

@@ -12,7 +12,7 @@ float Weights::StraightTowards(Node* current, Node* neighbour, Node* end) {
 	Vector2D curr2Nei(neighbour->GetX() - current->GetX(), neighbour->GetY() - current->GetY());
 	curr2Nei.Normalize();
 
-	return (1.0f - Vector2D::DotProduct(curr2End, curr2Nei)) * 0.01f;
+	return (1.0f - Vector2D::DotProduct(curr2End, curr2Nei)) * 0.0f;
 }
 
 Weights::~Weights() {

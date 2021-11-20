@@ -3,6 +3,10 @@
 NodeHeap::NodeHeap() {
 }
 
+void NodeHeap::Reserve(const size_t capacity) {
+	m_heap.reserve(capacity);
+}
+
 /// <summary>
 /// Add to heap
 /// </summary>

@@ -66,6 +66,7 @@ void Pathfind::A_Star_ClosedSet(const char * filePath, const char* savePath, Heu
 	std::vector<Node*> closedSet;
 
 	NodeHeap* openSet = new NodeHeap();
+	openSet->Reserve(width * height);
 
 	//std::priority_queue<Node*, std::vector<Node*>, decltype(&Node::Ascending)> openSet(Node::Ascending);
 

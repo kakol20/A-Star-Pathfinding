@@ -10,6 +10,8 @@ class NodeHeap {
 public:
 	NodeHeap();
 
+	void Reserve(const size_t capacity);
+
 	void Push(Node* item);
 	void Pop();
 

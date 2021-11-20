@@ -19,13 +19,18 @@ int main() {
 
 	for (auto it = files.begin(); it != files.end(); it++) {
 		String pathLoc = "images/";
-		String savePath = "images/";
+		String savePathEuclidean = "images/";
+		String savePathManhattan = "images/";
 
 		pathLoc = pathLoc + *it;
-		savePath = pathLoc + "_solve.png";
+		savePathManhattan = pathLoc + "_solve_manhattan.png";
+		savePathEuclidean = pathLoc + "_solve_euclidean.png";
 		pathLoc = pathLoc + ".png";
 
-		Pathfind::A_Star_ClosedSet(pathLoc.GetChar(), savePath.GetChar(), Heuristic::EUCLIDEAN, true, false);
+		Pathfind::A_Star_ClosedSet(pathLoc.GetChar(), savePathManhattan.GetChar(), Heuristic::MANHATTAN, true, false);
+		Pathfind::A_Star_ClosedSet(pathLoc.GetChar(), savePathEuclidean.GetChar(), Heuristic::EUCLIDEAN, true, false);
+
+		std::cout << "----------\n";
 		//Pathfind::A_Start_OpenSet(pathLoc.GetChar(), savePath.GetChar(), Heuristic::EUCLIDEAN, true, false);
 	}
 

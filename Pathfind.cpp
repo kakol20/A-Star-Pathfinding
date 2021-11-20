@@ -17,6 +17,8 @@ Pathfind::Pathfind() {
 /// <param name="allowDiagonal"></param>
 /// <param name="allowCross"></param>
 void Pathfind::A_Star_ClosedSet(const char * filePath, const char* savePath, Heuristic heuristic, bool allowDiagonal, bool allowCross) {
+	std::cout << '\n';
+
 	Image path(filePath);
 
 	// create grid
@@ -227,6 +229,7 @@ void Pathfind::A_Star_ClosedSet(const char * filePath, const char* savePath, Heu
 	}
 
 	path.Write(savePath);
+	std::cout << "Path Length: " << end->GetGCost() << '\n';
 
 	// destroy pointers
 	openSet->Clear();

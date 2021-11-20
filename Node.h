@@ -2,7 +2,7 @@
 #define NODE_H
 
 enum class Heuristic {
-	MANHATTAN, EUCLIDEAN
+	MANHATTAN, EUCLIDEAN, CHEBYSHEV, OCTILE
 };
 
 class Node {

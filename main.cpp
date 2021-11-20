@@ -1,6 +1,8 @@
 #include <vector>
 #include <stdlib.h>
 #include <algorithm>
+#include <map>
+#include <unordered_map>
 
 #include "Image.h"
 #include "Node.h"
@@ -11,27 +13,37 @@ int main() {
 	// open image
 	std::vector<String> files;
 
-	files.push_back("blank");
-	files.push_back("blank_10x10");
-	files.push_back("simple");
+	//files.push_back("blank");
+	//files.push_back("blank_10x10");
+	//files.push_back("simple");
 	files.push_back("obstacles");
-	files.push_back("maze");
+	//files.push_back("maze");
+
+	std::map<Heuristic, String> heuristics;
+	heuristics[Heuristic::CHEBYSHEV] = "chebyshev";
+	heuristics[Heuristic::EUCLIDEAN] = "euclidean";
+	heuristics[Heuristic::MANHATTAN] = "manhattan";
+	heuristics[Heuristic::OCTILE] = "octile";
 
 	for (auto it = files.begin(); it != files.end(); it++) {
 		String pathLoc = "images/";
-		String savePathEuclidean = "images/heuristic/";
-		String savePathManhattan = "images/heuristic/";
+		String tempLoc = pathLoc + *it;
 
-		pathLoc = pathLoc + *it;
-		savePathEuclidean = savePathEuclidean + *it;
-		savePathManhattan = savePathManhattan + *it;
+		pathLoc = tempLoc;
 		
-		savePathManhattan = savePathManhattan + "_solve_manhattan.png";
-		savePathEuclidean = savePathEuclidean + "_solve_euclidean.png";
 		pathLoc = pathLoc + ".png";
 
-		Pathfind::AStar(pathLoc.GetChar(), savePathManhattan.GetChar(), Heuristic::MANHATTAN, true, false);
-		Pathfind::AStar(pathLoc.GetChar(), savePathEuclidean.GetChar(), Heuristic::EUCLIDEAN, true, false);
+		for (auto jt = heuristics.begin(); jt != heuristics.end(); jt++) {
+			String savePath = "images/heuristic/";
+			savePath += *it;
+			savePath += "_solve_";
+
+			savePath += (*jt).second;
+			savePath += ".png";
+
+			Pathfind::AStar(pathLoc.GetChar(), savePath.GetChar(), (*jt).first, true, false);
+		}
+
 
 		std::cout << "\n----------\n";
 		//Pathfind::A_Start_OpenSet(pathLoc.GetChar(), savePath.GetChar(), Heuristic::EUCLIDEAN, true, false);

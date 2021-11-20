@@ -108,12 +108,23 @@ float Node::Distance(const Node* start, const Node* end, Heuristic heuristic) {
 	float mx = std::max(x, y);
 	float mn = std::min(x, y);
 
+	float sqrt2 = 1.41f;
+
+	float F = sqrt2 - 1.0f;
+
 	switch (heuristic) {
 	case Heuristic::MANHATTAN:
 		return x + y;
 
 	case Heuristic::EUCLIDEAN:
-		return (1.4f * mn) + 1.0f * (mx - mn);
+		return (sqrt2 * mn) + 1.0f * (mx - mn);
+
+	case Heuristic::CHEBYSHEV:
+		return std::max(x, y);
+
+	case Heuristic::OCTILE:
+		return F * mn + mx;
+
 	}
 	return 0.0f;
 }

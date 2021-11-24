@@ -38,8 +38,13 @@ void NodeHeap::Clear() {
 	m_heap.clear();
 }
 
-bool NodeHeap::Contains(Node* item) {
-	return std::find(m_heap.begin(), m_heap.end(), item) != m_heap.end();
+int NodeHeap::Contains(Node* item) {
+	//return s
+	for (size_t i = 0; i < m_heap.size(); i++) {
+		if (m_heap[i] == item) return (int)i;
+	}
+
+	return -1;
 }
 
 bool NodeHeap::Empty() {
@@ -73,8 +78,16 @@ NodeHeap::~NodeHeap() {
 /// Sorts from the top
 /// </summary>
 void NodeHeap::SortDown() {
-	size_t parent = 0;
-	
+	SortDown(0);
+}
+
+/// <summary>
+/// Sorts down from index i
+/// </summary>
+/// <param name="i"></param>
+void NodeHeap::SortDown(const size_t i) {
+	size_t parent = i;
+
 	while (true) {
 		size_t childL = (parent * 2) + 1;
 		size_t childR = (parent * 2) + 2;
@@ -109,7 +122,15 @@ void NodeHeap::SortDown() {
 /// Sorts from the bottom
 /// </summary>
 void NodeHeap::SortUp() {
-	int child = m_heap.size() - 1;
+	SortUp(m_heap.size() - 1);
+}
+
+/// <summary>
+/// Sorts up from index i
+/// </summary>
+/// <param name="i"></param>
+void NodeHeap::SortUp(const size_t i) {
+	int child = (int)i;
 
 	while (true) {
 		int parent = (child - 1) / 2;

@@ -117,7 +117,7 @@ float Node::Distance(const Node* start, const Node* end, Heuristic heuristic) {
 		return x + y;
 
 	case Heuristic::EUCLIDEAN:
-		return (sqrt2 * mn) + 1.0f * (mx - mn);
+		return (sqrt2 * mn) + (mx - mn);
 
 	case Heuristic::CHEBYSHEV:
 		return std::max(x, y);

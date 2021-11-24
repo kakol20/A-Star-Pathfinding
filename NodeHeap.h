@@ -16,12 +16,15 @@ public:
 
 	void Clear();
 	
-	bool Contains(Node* item);
+	int Contains(Node* item);
 	bool Empty();
 	size_t Size();
 
 	Node* operator[](const size_t i);
 	Node* GetIndex(const size_t i);
+
+	void SortDown(const size_t i);
+	void SortUp(const size_t i);
 
 	Node* Top();
 
@@ -30,6 +33,7 @@ public:
 private:
 	void SortDown();
 	void SortUp();
+	
 
 	std::vector<Node*> m_heap;
 };

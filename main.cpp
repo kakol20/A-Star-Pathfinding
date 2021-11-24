@@ -17,6 +17,7 @@ int main() {
 	//files.push_back("blank_10x10");
 	//files.push_back("simple");
 	files.push_back("obstacles");
+	files.push_back("monaco");
 	//files.push_back("maze");
 
 	std::map<Heuristic, String> heuristics;
@@ -24,6 +25,7 @@ int main() {
 	heuristics[Heuristic::EUCLIDEAN] = "euclidean";
 	heuristics[Heuristic::MANHATTAN] = "manhattan";
 	heuristics[Heuristic::OCTILE] = "octile";
+	heuristics[Heuristic::REALEUCLIDEAN] = "realEuclidean";
 
 	for (auto it = files.begin(); it != files.end(); it++) {
 		String pathLoc = "images/";
@@ -34,14 +36,14 @@ int main() {
 		pathLoc = pathLoc + ".png";
 
 		for (auto jt = heuristics.begin(); jt != heuristics.end(); jt++) {
-			String savePath = "images/weights/";
+			String savePath = "images/heuristic/";
 			savePath += *it;
-			savePath += "_straightTowards_";
+			savePath += "_solve_";
 
 			savePath += (*jt).second;
 			savePath += ".png";
 
-			Pathfind::AStar(pathLoc.GetChar(), savePath.GetChar(), (*jt).first, true, false);
+			Pathfind::AStar(pathLoc.GetChar(), savePath.GetChar(), (*jt).first, Weight::NONE, true, false);
 		}
 
 

@@ -17,7 +17,7 @@ Pathfind::Pathfind() {
 /// <param name="heuristic"></param>
 /// <param name="allowDiagonal"></param>
 /// <param name="allowCross"></param>
-void Pathfind::AStar(const char * filePath, const char* savePath, Heuristic heuristic, bool allowDiagonal, bool allowCross) {
+void Pathfind::AStar(const char * filePath, const char* savePath, Heuristic heuristic, Weight weight, bool allowDiagonal, bool allowCross) {
 	std::cout << '\n';
 
 	Image path(filePath);
@@ -73,6 +73,22 @@ void Pathfind::AStar(const char * filePath, const char* savePath, Heuristic heur
 	for (int x = 0; x < width; x++) {
 		for (int y = 0; y < height; y++) {
 			grid[x][y]->SetHCost(end, heuristic);
+		}
+	}
+
+	if (!foundStart) {
+		for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
+				if (!grid[x][y]->GetObstacle()) start = grid[x][y];
+			}
+		}
+	}
+
+	if (!foundEnd) {
+		for (int y = height - 1; y >= 0; y--) {
+			for (int x = width; x >= 0; x--) {
+				if (!grid[x][y]->GetObstacle()) end = grid[x][y];
+			}
 		}
 	}
 
@@ -154,24 +170,41 @@ void Pathfind::AStar(const char * filePath, const char* savePath, Heuristic heur
 		}
 
 		// query neighbours
-		int tentative_gCost = 0;
 		for (size_t i = 0; i < neighbours.size(); i++) {
 			if (!neighbours[i]->GetObstacle()) {
 				bool inClosedSet = std::find(closedSet.begin(), closedSet.end(), neighbours[i]) != closedSet.end();
 
 				if (!inClosedSet) {
-					bool inOpenSet = openSet->Contains(neighbours[i]);
+					int inOpenSet = openSet->Contains(neighbours[i]);
 
-					float tempG = (float)current->GetGCost() + Node::Distance(current, neighbours[i], heuristic) + Weights::StraightTowards(current, neighbours[i], end);
+					//float tempG = (float)current->GetGCost() + Node::Distance(current, neighbours[i], heuristic) + ;
+					//float tempG = current->GetGCost() + Node::Distance(current, neighbours[i], heuristic) + ;
+					float tempG = (float)current->GetGCost() + Node::Distance(current, neighbours[i], heuristic);
 
-					if (tempG < neighbours[i]->GetGCost() || !inOpenSet) {
+					switch (weight) {
+					case Weight::STRAIGHT:
+						tempG += Weights::StraightTowards(current, neighbours[i], end);
+						break;
+
+					case Weight::TURNING:
+						tempG += Weights::AvoidTurning(current, neighbours[i]);
+						break;
+
+					default:
+						break;
+					}
+
+					if (tempG < neighbours[i]->GetGCost() || inOpenSet < 0) {
 						neighbours[i]->SetGCost(tempG);
 						neighbours[i]->SetFCost();
 
 						neighbours[i]->SetParent(current);
 
-						if (!inOpenSet) {
+						if (inOpenSet < 0) {
 							openSet->Push(neighbours[i]);
+						}
+						else {
+							openSet->SortUp(inOpenSet);
 						}
 					}
 				}

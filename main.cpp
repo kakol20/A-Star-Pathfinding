@@ -53,5 +53,7 @@ int main() {
 
 	system("pause");
 
+	heuristics.clear();
+
 	return 0;
 }

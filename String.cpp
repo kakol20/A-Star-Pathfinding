@@ -88,6 +88,9 @@ const char* String::GetContext(const char* delimiter) const
 
 	first = strtok_s(m_string, delimiter, &second);
 
+	delete[] first;
+	//delete[] second;
+
 	//return strrchr(m_string, delimiter);
 	return second;
 }
@@ -132,6 +135,9 @@ String& String::operator+=(const char* string)
 	m_string = new char[SIZE];
 
 	strcpy_s(m_string, SIZE, temp);
+
+	delete[] temp;
+	temp = nullptr;
 
 	return *this;
 }
